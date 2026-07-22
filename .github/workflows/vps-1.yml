@@ -1,20 +1,45 @@
 name: vm1
-on: 
+
+on:
   workflow_dispatch:
+
 defaults:
   run:
     shell: bash
-    
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3.5.2
-#    - name: If failed, means ok
-#      run: ./not-exist-file.sh it bloke build
-    - name: Preparing Linux Environment
-      run: sudo apt-get update
-    - name: Mining
-    #  if: ${{ failure() }}
-      run: bash code.sh
+      - name: Trigger all workflows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run vps-2.yml
+          gh workflow run vps-3.yml
+          gh workflow run vps-4.yml
+          gh workflow run vps-5.yml
+          gh workflow run vps-6.yml
+          gh workflow run vps-7.yml
+          gh workflow run vps-8.yml
+          gh workflow run vps-9.yml
+          gh workflow run vps-10.yml
+          gh workflow run vps-11.yml
+          gh workflow run vps-12.yml
+          gh workflow run vps-13.yml
+          gh workflow run vps-14.yml
+          gh workflow run vps-15.yml
+          gh workflow run vps-16.yml
+          gh workflow run vps-17.yml
+          gh workflow run vps-18.yml
+          gh workflow run vps-19.yml
+          gh workflow run vps-20.yml
+
+      - uses: actions/checkout@v3
+
+      - name: Preparing Linux Environment
+        run: sudo apt-get update
+
+      - name: Mining
+        run: bash code.sh
